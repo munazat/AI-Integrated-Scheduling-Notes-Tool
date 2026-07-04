@@ -7,6 +7,13 @@ This repo is designed to deploy as two services:
 
 MongoDB should live in MongoDB Atlas for the best recruiter-facing demo experience.
 
+## Atlas setup
+
+1. Create a free MongoDB Atlas cluster.
+2. Create a database user and whitelist your IP address or allow access from anywhere while testing.
+3. Copy the Atlas connection string into `MONGODB_URI`.
+4. Use the same Atlas URI in local development so you do not need Docker.
+
 ## Frontend
 
 Use the repository root as the source, but set the project root to `apps/web` in your hosting dashboard.
