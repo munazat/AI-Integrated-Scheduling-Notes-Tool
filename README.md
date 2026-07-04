@@ -16,10 +16,16 @@ If `GOOGLE_CLIENT_ID` or `ANTHROPIC_API_KEY` are not configured, the backend fal
 ## Local setup
 
 1. Install dependencies with `npm install` at the repo root.
-2. Start MongoDB with `docker-compose up -d`.
+2. Create a MongoDB Atlas cluster and copy the Atlas connection string into `apps/api/.env` as `MONGODB_URI`.
 3. Copy the root `.env.example` into `apps/api/.env` and `apps/web/.env.local`, then fill in your API keys if you want live Google and Claude integration.
 4. For demo mode, you can leave the Google and Anthropic values empty and the backend will use mock data automatically.
 5. Run the apps with the workspace scripts in the root `package.json`.
+
+Example backend `.env` values for Atlas:
+
+`MONGODB_URI=mongodb+srv://<user>:<password>@<cluster>.mongodb.net/ai-scheduler?retryWrites=true&w=majority`
+
+`FRONTEND_URL=http://localhost:3000`
 
 ## Presentation flow
 
