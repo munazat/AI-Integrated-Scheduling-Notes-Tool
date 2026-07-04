@@ -1,0 +1,14 @@
+.env
+.env.local
+.env.*.local
+.next
+dist
+coverage
+node_modules
+*.log
+*.tsbuildinfo
+.DS_Store
+
+apps/web/.next
+apps/web/tsconfig.tsbuildinfo
+apps/api/dist
