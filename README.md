@@ -28,6 +28,45 @@ If `GOOGLE_CLIENT_ID` or `ANTHROPIC_API_KEY` are not configured, the backend fal
 3. Click `Save and summarize` to generate the visible inference output.
 4. Share the summaries tab or the raw response panel during review.
 
+## See The Inference Yourself
+
+If you want to inspect the output locally, use the demo flow and watch the dashboard update in real time:
+
+1. Start the frontend and backend.
+2. Open the landing page and click `Launch demo`.
+3. Go to the `Notes` tab.
+4. Click `Load sample note` or paste your own notes.
+5. Click `Save and summarize`.
+6. Open the `Summaries` tab to see the generated action items, decisions, key points, and follow-ups.
+7. Check the `Raw response` panel to see the exact inference payload that was returned.
+
+If you are using live mode with Google and Anthropic keys, the same flow works, but the summary will come from the real API instead of the mock fallback.
+
+## Screenshots For README
+
+The best screenshots to add are:
+
+1. Landing page with the `Launch demo` button visible.
+2. Dashboard `Notes` tab with a sample note loaded.
+3. Dashboard `Summaries` tab showing the structured inference output.
+4. Dashboard `Raw response` panel showing the exact returned JSON or text.
+
+Recommended file names if you add them under `docs/screenshots/`:
+
+1. `landing-page.png`
+2. `notes-demo.png`
+3. `summary-output.png`
+4. `raw-response.png`
+
+Example README image block:
+
+```md
+![Landing page](docs/screenshots/landing-page.png)
+![Notes demo](docs/screenshots/notes-demo.png)
+![Summary output](docs/screenshots/summary-output.png)
+![Raw response](docs/screenshots/raw-response.png)
+```
+
 ## Recruiter walkthrough
 
 1. Start at the landing page and point out that the product can run in demo mode without API keys.
