@@ -28,6 +28,63 @@ If `GOOGLE_CLIENT_ID` or `ANTHROPIC_API_KEY` are not configured, the backend fal
 3. Click `Save and summarize` to generate the visible inference output.
 4. Share the summaries tab or the raw response panel during review.
 
+## Recruiter walkthrough
+
+1. Start at the landing page and point out that the product can run in demo mode without API keys.
+2. Open the dashboard and show the calendar, note capture, and summaries sections as a single flow.
+3. Paste or load a sample note, then run `Save and summarize` so the inference step is visible.
+4. Switch to the summaries tab and call out the raw response panel so the recruiter can see exactly what the model returned.
+
+## Live deployment
+
+The cleanest live setup for this repo is:
+
+1. Frontend on Vercel.
+2. Backend on Render or Railway.
+3. MongoDB Atlas for the database.
+
+### Frontend on Vercel
+
+1. Create a new Vercel project from this GitHub repo.
+2. Set the root directory to `apps/web`.
+3. Add `NEXT_PUBLIC_API_URL` for your backend URL.
+4. Deploy the project and use the generated URL as the recruiter-facing demo link.
+
+### Backend on Render
+
+1. Create a new Web Service from the same GitHub repo.
+2. Set the root directory to `apps/api`.
+3. Use `npm install` as the build command.
+4. Use `npm run build` as the build step.
+5. Use `npm run start:prod` as the start command.
+6. Set `MONGODB_URI`, `SESSION_SECRET`, `FRONTEND_URL`, and any Google/Anthropic keys you want for live mode.
+
+### Recommended production env vars
+
+Frontend:
+
+`NEXT_PUBLIC_API_URL=https://your-backend-url`
+
+Backend:
+
+`PORT=3001`
+
+`MONGODB_URI=mongodb+srv://...`
+
+`SESSION_SECRET=your-long-random-secret`
+
+`FRONTEND_URL=https://your-frontend-url`
+
+`GOOGLE_CLIENT_ID=...`
+
+`GOOGLE_CLIENT_SECRET=...`
+
+`GOOGLE_REDIRECT_URI=https://your-backend-url/auth/google/callback`
+
+`ANTHROPIC_API_KEY=...`
+
+If you want the demo to stay keyless, leave the Google and Anthropic values empty and the mock path will continue to work.
+
 ## Project structure
 
 `apps/api` contains the NestJS backend with Google auth, calendar sync, note persistence, and summary generation.
