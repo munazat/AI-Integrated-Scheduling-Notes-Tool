@@ -13,21 +13,10 @@ export class AuthController {
    * Otherwise, the Passport GoogleStrategy intercepts and redirects to Google's consent screen.
    */
   @Get('google')
-  async googleAuth(@Res() res: Response) {
-    // If Google credentials are not configured, fall back to demo mode
-    if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
-      const demoUser = { _id: 'demo-user', email: 'demo@app.local' };
-      const sessionToken = this.authService.issueSessionToken(demoUser);
-      const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
-      return res.redirect(`${frontendUrl}/dashboard#token=${sessionToken}`);
-    }
-    // Otherwise, delegate to Google OAuth guard (will redirect to Google's consent screen)
-    return this.googleAuthGuard();
-  }
-
   @UseGuards(AuthGuard('google'))
-  private googleAuthGuard() {
-    // Intentionally empty — AuthGuard handles the redirect to Google.
+  async googleAuth(@Res() res: Response) {
+    // If we reach here, AuthGuard succeeded and is redirecting to Google.
+    // This handler is intentionally empty — the @UseGuards handles everything.
   }
 
   /**

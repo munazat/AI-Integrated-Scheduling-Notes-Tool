@@ -1,10 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy, VerifyCallback } from 'passport-google-oauth20';
 import { AuthService } from '../auth.service';
 
 @Injectable()
 export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
+  private readonly logger = new Logger(GoogleStrategy.name);
+
   constructor(private authService: AuthService) {
     super({
       clientID: process.env.GOOGLE_CLIENT_ID,
@@ -23,6 +25,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
       });
       done(null, user);
     } catch (error) {
+      this.logger.error(`Google auth validation failed: ${error}`);
       done(error);
     }
   }

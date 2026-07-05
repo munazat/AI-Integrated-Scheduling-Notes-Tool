@@ -14,7 +14,14 @@ import { AppService } from './app.service';
       isGlobal: true,
       envFilePath: '.env',
     }),
-    MongooseModule.forRoot(process.env.MONGODB_URI || 'mongodb://localhost:27017/ai-scheduler'),
+    MongooseModule.forRoot(process.env.MONGODB_URI || 'mongodb://localhost:27017/ai-scheduler', {
+      serverSelectionTimeoutMS: 3000,
+      connectTimeoutMS: 3000,
+      retryAttempts: 1,
+      retryDelay: 100,
+      // Allow app to start even if database connection fails
+      bufferCommands: false,
+    }),
     AuthModule,
     CalendarModule,
     NotesModule,
