@@ -33,14 +33,14 @@ export default function HomePage() {
         <header className="mb-8 flex flex-col gap-4 border-b border-white/10 pb-8 md:flex-row md:items-center md:justify-between">
           <div className="space-y-3">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.24em] text-amber-200">
-              Demo-ready scheduling intelligence
+              AI-Powered Meeting Intelligence
             </div>
             <div className="max-w-3xl space-y-4">
               <h1 className="font-display text-4xl font-semibold tracking-tight text-white md:text-6xl">
-                AI Integrated Scheduling Notes Tool
+                Smart Meeting Notes & Summaries
               </h1>
               <p className="max-w-2xl text-base leading-7 text-slate-300 md:text-lg">
-                Calendar context, raw meeting notes, and structured AI summaries presented in one clean flow so recruiters can see the exact inference path end to end.
+                Turn your calendar events and raw meeting notes into structured AI summaries. Capture decisions, action items, and follow-ups in seconds.
               </p>
             </div>
           </div>
@@ -58,13 +58,13 @@ export default function HomePage() {
               onClick={() => router.push('/auth')}
               className="rounded-full border border-white/15 px-5 py-3 text-sm font-semibold text-slate-200 transition hover:border-amber-300 hover:text-white"
             >
-              Connect Google
+              Sign In
             </button>
             <button
               onClick={startDemo}
               className="rounded-full bg-gradient-to-r from-amber-400 to-orange-500 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:brightness-110"
             >
-              Launch demo
+              Try Now
             </button>
           </div>
         </header>
@@ -82,18 +82,18 @@ export default function HomePage() {
 
                   <div className="space-y-4">
                     <h2 className="font-display text-3xl font-semibold text-white md:text-4xl">
-                      A presentation-first demo that shows the full pipeline.
+                      See your meetings become actionable summaries.
                     </h2>
                     <p className="max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
-                      The backend falls back to realistic mock calendar events and mock AI output when API keys are absent, so anyone can clone the repo and watch the workflow without secrets.
+                      Connect your Google Calendar, capture raw notes during meetings, and let AI extract decisions, action items, and key points automatically.
                     </p>
                   </div>
 
                   <div className="grid gap-3 sm:grid-cols-3">
                     {[
-                      ['1. Context', 'Calendar events load first, giving the note-taking flow real meeting context.'],
-                      ['2. Capture', 'Raw notes are attached to the selected event and saved in MongoDB.'],
-                      ['3. Infer', 'Claude or mock inference converts notes into structured action items.'],
+                      ['1. Connect Calendar', 'Load your Google Calendar events so you can attach notes to specific meetings.'],
+                      ['2. Capture Notes', 'Record raw meeting notes or observations directly in the app.'],
+                      ['3. Get Summary', 'AI automatically extracts decisions, actions, and key points from your notes.'],
                     ].map(([title, text]) => (
                       <div key={title} className="rounded-2xl border border-white/10 bg-white/5 p-4">
                         <p className="text-sm font-semibold text-white">{title}</p>
@@ -105,8 +105,8 @@ export default function HomePage() {
 
                 <div className="rounded-3xl border border-white/10 bg-slate-900/80 p-5 shadow-inner shadow-black/20">
                   <div className="flex items-center justify-between border-b border-white/10 pb-3 text-xs uppercase tracking-[0.24em] text-slate-400">
-                    <span>Presentation preview</span>
-                    <span>Exact flow</span>
+                    <span>Example workflow</span>
+                    <span>From calendar to summary</span>
                   </div>
 
                   <div className="mt-4 space-y-4">
@@ -138,9 +138,9 @@ export default function HomePage() {
 
             <div className="grid gap-4 md:grid-cols-3">
               {[
-                ['Zero-setup demo', 'Run the app with no Google or Anthropic keys and still see the whole experience.'],
-                ['Visible inference', 'Every step stays on screen, from event context to saved summary.'],
-                ['Recruiter friendly', 'The interface reads like a product walkthrough instead of an internal tool.'],
+                ['Try Instantly', 'Start with demo data to explore the workflow, no sign-up required.'],
+                ['See Results in Real-Time', 'Watch your notes transform into structured summaries instantly.'],
+                ['Privacy First', 'Your data stays with you—sync only the calendars you choose.'],
               ].map(([title, text]) => (
                 <div key={title} className="rounded-3xl border border-white/10 bg-white/5 p-5">
                   <p className="font-display text-lg font-semibold text-white">{title}</p>

@@ -29,22 +29,22 @@ export default function LoginPage() {
         <div className="grid w-full gap-8 lg:grid-cols-[0.95fr_1.05fr]">
           <section className="space-y-6">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.22em] text-amber-200">
-              Authentication or demo mode
+              Get started
             </div>
 
             <div className="space-y-4">
               <h1 className="font-display text-4xl font-semibold tracking-tight text-white md:text-6xl">
-                Sign in, or launch the demo instantly.
+                Sign in to get started.
               </h1>
               <p className="max-w-2xl text-base leading-7 text-slate-300 md:text-lg">
-                Recruiters can use the seeded demo route to inspect the app immediately, or connect Google to run the live OAuth and calendar flow.
+                Connect your Google Calendar to sync your meetings and start capturing smart summaries.
               </p>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
               {[
-                ['Live mode', 'Google OAuth, real calendar sync, and Claude summaries when credentials are present.'],
-                ['Demo mode', 'Mock calendar data and mock inference let the entire flow run with no secrets.'],
+                ['Full Experience', 'Sign in with Google to sync your calendar and get AI summaries of your meetings.'],
+                ['Try It First', 'Explore with demo data to see how the app works before connecting your calendar.'],
               ].map(([title, text]) => (
                 <div key={title} className="rounded-3xl border border-white/10 bg-white/5 p-5">
                   <p className="font-display text-lg font-semibold text-white">{title}</p>
@@ -56,10 +56,10 @@ export default function LoginPage() {
 
           <section className="panel mx-auto w-full max-w-xl">
             <div className="space-y-2 text-center">
-              <p className="text-xs uppercase tracking-[0.24em] text-slate-400">Access point</p>
-              <h2 className="font-display text-3xl font-semibold text-white">AI Integrated Scheduling Notes Tool</h2>
+              <p className="text-xs uppercase tracking-[0.24em] text-slate-400">Welcome</p>
+              <h2 className="font-display text-3xl font-semibold text-white">Smart Meeting Notes</h2>
               <p className="text-sm leading-6 text-slate-300">
-                Enter through Google sign-in for the full backend flow, or use demo mode to preview the same experience immediately.
+                Turn your meetings into actionable summaries powered by AI.
               </p>
             </div>
 
@@ -81,16 +81,16 @@ export default function LoginPage() {
                 onClick={startDemo}
                 className="flex w-full items-center justify-center rounded-2xl border border-amber-400/20 bg-amber-400/10 px-4 py-3 font-semibold text-amber-100 transition hover:bg-amber-400/15"
               >
-                Launch demo without credentials
+                Try with Demo Data
               </button>
             </div>
 
             <div className="mt-6 rounded-2xl border border-cyan-400/20 bg-cyan-400/10 p-4 text-sm leading-6 text-slate-200">
-              The demo path seeds a local user, opens the dashboard, and uses mock calendar and mock AI summaries so the UI stays fully runnable.
+              Try the demo to explore the app with sample meeting data and see how AI summaries work.
             </div>
 
             <p className="mt-6 text-center text-xs text-slate-400">
-              By design, the browser only stores a session token after Google auth or a demo marker for the presentation flow.
+              We only use your Google credentials to sync your calendar. Your data is never shared.
             </p>
           </section>
         </div>

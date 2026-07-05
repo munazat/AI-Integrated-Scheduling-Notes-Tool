@@ -210,10 +210,10 @@ export default function DashboardPage() {
           <div className="space-y-3">
             <div className="flex flex-wrap items-center gap-3">
               <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.22em] text-slate-300">
-                {isDemoMode ? 'Presentation demo' : 'Live session'}
+                {isDemoMode ? 'Demo mode' : 'Connected'}
               </span>
               <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-semibold text-emerald-200">
-                {eventsLoading ? 'Syncing calendar...' : `${events.length} events loaded`}
+                {eventsLoading ? 'Syncing...' : `${events.length} events`}
               </span>
             </div>
 
@@ -222,7 +222,7 @@ export default function DashboardPage() {
                 {userName || 'Dashboard'}
               </h1>
               <p className="max-w-3xl text-sm leading-6 text-slate-300 md:text-base">
-                Calendar context, raw notes, and structured inference live together so the evaluation flow is easy to follow on GitHub.
+                Manage your meetings, capture notes, and get AI-powered summaries.
               </p>
             </div>
           </div>
