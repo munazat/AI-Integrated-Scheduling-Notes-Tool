@@ -1,165 +1,111 @@
-# AI Integrated Scheduling Notes Tool
+# AI-Integrated Scheduling & Notes Tool
 
-This repository is a recruiter-friendly demo that turns calendar context and raw meeting notes into structured AI summaries. It can run in live mode with Google OAuth and Anthropic, or in mock/demo mode with no external keys so the full flow is always visible.
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js-14-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js" />
+  <img src="https://img.shields.io/badge/NestJS-Backend-E0234E?style=for-the-badge&logo=nestjs&logoColor=white" alt="NestJS" />
+  <img src="https://img.shields.io/badge/MongoDB-Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" />
+  <img src="https://img.shields.io/badge/Claude_API-Anthropic-D97757?style=for-the-badge&logo=anthropic&logoColor=white" alt="Claude API" />
+  <img src="https://img.shields.io/badge/TypeScript-Strict-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+</p>
 
-## What you can show
+<p align="center">
+  Turn calendar context and raw meeting notes into structured, actionable AI summaries.<br/>
+  Runs fully live with Google OAuth + Claude, or in a zero-config demo mode — the entire flow is always visible.
+</p>
 
-1. Calendar events load first, so the note capture flow has real meeting context.
-2. Notes are saved against the selected meeting.
-3. The summary button runs inference and returns action items, decisions, key points, and follow-ups.
-4. Everything is stored in MongoDB and surfaced in a polished dashboard.
+---
 
-## Demo mode
+## Preview
 
-If `GOOGLE_CLIENT_ID` or `ANTHROPIC_API_KEY` are not configured, the backend falls back to deterministic mock data. That means a reviewer can clone the repo, launch the demo from the landing page, and immediately see the pipeline without provisioning credentials.
+### Landing — the product in one screen
+The homepage doubles as a walkthrough: connect a calendar, capture notes, get a structured summary — with a live example of the exact JSON Claude returns.
 
-## Local setup
-
-1. Install dependencies with `npm install` at the repo root.
-2. Create a MongoDB Atlas cluster and copy the Atlas connection string into `apps/api/.env` as `MONGODB_URI`.
-3. Copy the root `.env.example` into `apps/api/.env` and `apps/web/.env.local`, then fill in your API keys if you want live Google and Claude integration.
-4. For demo mode, you can leave the Google and Anthropic values empty and the backend will use mock data automatically.
-5. Run the apps with the workspace scripts in the root `package.json`.
-
-Example backend `.env` values for Atlas:
-
-`MONGODB_URI=mongodb+srv://<user>:<password>@<cluster>.mongodb.net/ai-scheduler?retryWrites=true&w=majority`
-
-`FRONTEND_URL=http://localhost:3000`
-
-## Presentation flow
-
-1. Open the landing page and click `Launch demo`.
-2. Use the sample note button on the dashboard.
-3. Click `Save and summarize` to generate the visible inference output.
-4. Share the summaries tab or the raw response panel during review.
-
-## See The Inference Yourself
-
-If you want to inspect the output locally, use the demo flow and watch the dashboard update in real time:
-
-1. Start the frontend and backend.
-2. Open the landing page and click `Launch demo`.
-3. Go to the `Notes` tab.
-4. Click `Load sample note` or paste your own notes.
-5. Click `Save and summarize`.
-6. Open the `Summaries` tab to see the generated action items, decisions, key points, and follow-ups.
-7. Check the `Raw response` panel to see the exact inference payload that was returned.
-
-If you are using live mode with Google and Anthropic keys, the same flow works, but the summary will come from the real API instead of the mock fallback.
-
-## Screenshots For README
-
-The best screenshots to add are:
-
-1. Landing page with the `Launch demo` button visible.
-2. Dashboard `Notes` tab with a sample note loaded.
-3. Dashboard `Summaries` tab showing the structured inference output.
-4. Dashboard `Raw response` panel showing the exact returned JSON or text.
-
-Recommended file names if you add them under `docs/screenshots/`:
-
-1. `landing-page.png`
-2. `notes-demo.png`
-3. `summary-output.png`
-4. `raw-response.png`
-
-Example README image block:
-
-```md
 ![Landing page](docs/screenshots/landing-page.png)
-![Notes demo](docs/screenshots/notes-demo.png)
-![Summary output](docs/screenshots/summary-output.png)
-![Raw response](docs/screenshots/raw-response.png)
+
+### Sign in — real auth or instant demo
+Two paths in one screen: real Google OAuth for the full experience, or a single click into demo data with no setup required.
+
+![Sign in](docs/screenshots/sign-in.png)
+
+### Dashboard — calendar, notes, and the inference trace
+The dashboard tracks calendar events, saved notes, and generated summaries side by side, with an **Inference Trace** panel that shows exactly what happens, step by step, when you click "Summarize."
+
+![Dashboard demo](docs/screenshots/dashboard-demo.png)
+
+---
+
+## What this project actually does
+
+1. **Connect Calendar** — Google Calendar events are pulled in via OAuth2 and used as context for note-taking.
+2. **Capture Notes** — Raw meeting notes are recorded and attached to a specific calendar event.
+3. **Get Summary** — The note body is sent to Claude (Anthropic), which returns structured `actionItems`, `decisions`, `followUps`, and key points as JSON.
+
+No API keys are required to explore it — a built-in mock/demo mode simulates calendar data and summary generation so the entire pipeline is visible without any configuration.
+
+## Tech stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | Next.js 14 (App Router), React, Tailwind CSS, TanStack Query |
+| Backend | NestJS, Passport (Google OAuth2), JWT sessions |
+| Database | MongoDB (Atlas), Mongoose |
+| AI | Anthropic Claude API (`claude-3-5-sonnet`) |
+| Shared | TypeScript types shared across `apps/web` and `apps/api` via an npm workspace package |
+| Infra | Docker Compose for local MongoDB/Redis |
+
+## Architecture
+
+```
+.
+├── apps/
+│   ├── api/            # NestJS backend
+│   │   └── src/modules/
+│   │       ├── auth/        # Google OAuth2 + JWT + demo fallback
+│   │       ├── calendar/    # Google Calendar sync
+│   │       ├── notes/       # Meeting notes CRUD
+│   │       └── summaries/   # Claude API integration
+│   └── web/             # Next.js frontend
+│       └── app/
+│           ├── page.tsx        # Landing
+│           ├── auth/page.tsx   # Sign-in
+│           └── dashboard/      # Calendar / Notes / Summaries tabs
+├── packages/
+│   └── shared/           # Shared TypeScript types
+└── docker-compose.yml     # Local MongoDB + Redis
 ```
 
-## Recruiter walkthrough
+## Getting started
 
-1. Start at the landing page and point out that the product can run in demo mode without API keys.
-2. Open the dashboard and show the calendar, note capture, and summaries sections as a single flow.
-3. Paste or load a sample note, then run `Save and summarize` so the inference step is visible.
-4. Switch to the summaries tab and call out the raw response panel so the recruiter can see exactly what the model returned.
+### Option 1 — Try it instantly (no setup)
+Click **"Try with Demo Data"** from the sign-in screen. This seeds mock calendar events and lets you exercise the full notes → summary flow without any credentials.
 
-## Live deployment
+### Option 2 — Run it locally with live data
 
-The cleanest live setup for this repo is:
+```bash
+git clone https://github.com/munazat/AI-Integrated-Scheduling-Notes-Tool.git
+cd AI-Integrated-Scheduling-Notes-Tool
+npm install
+```
 
-1. Frontend on Vercel.
-2. Backend on Render or Railway.
-3. MongoDB Atlas for the database.
+Copy `.env.example` into `apps/api/.env` and `apps/web/.env.local` and fill in:
+- A MongoDB connection string (Atlas free tier works well — see `DEPLOYMENT.md`)
+- Google OAuth `CLIENT_ID` / `CLIENT_SECRET` (for live calendar sync)
+- An `ANTHROPIC_API_KEY` (for live summaries — omit it to fall back to mock summaries automatically)
 
-### Frontend on Vercel
+```bash
+npm run dev
+```
 
-1. Create a new Vercel project from this GitHub repo.
-2. Set the root directory to `apps/web`.
-3. Add `NEXT_PUBLIC_API_URL` for your backend URL.
-4. Deploy the project and use the generated URL as the recruiter-facing demo link.
+This starts both the NestJS API and the Next.js frontend. Open `http://localhost:3000`.
 
-### Backend on Render
+See [`DEPLOYMENT.md`](DEPLOYMENT.md) for a full deployment walkthrough.
 
-1. Create a new Web Service from the same GitHub repo.
-2. Set the root directory to `apps/api`.
-3. Use `npm install` as the build command.
-4. Use `npm run build` as the build step.
-5. Use `npm run start:prod` as the start command.
-6. Set `MONGODB_URI`, `SESSION_SECRET`, `FRONTEND_URL`, and any Google/Anthropic keys you want for live mode.
+## Roadmap / known limitations
 
-### Recommended production env vars
+- No automated test suite yet — planned: unit tests around the Claude response parsing/fallback logic in `summaries.service.ts`.
+- No CI pipeline yet — planned: a GitHub Actions workflow for lint + build on PRs.
+- Redis is provisioned in `docker-compose.yml` for future caching (e.g. calendar sync results) but not yet wired into the application.
 
-Frontend:
+## License
 
-`NEXT_PUBLIC_API_URL=https://your-backend-url`
-
-Backend:
-
-`PORT=3001`
-
-`MONGODB_URI=mongodb+srv://...`
-
-`SESSION_SECRET=your-long-random-secret`
-
-`FRONTEND_URL=https://your-frontend-url`
-
-`GOOGLE_CLIENT_ID=...`
-
-`GOOGLE_CLIENT_SECRET=...`
-
-`GOOGLE_REDIRECT_URI=https://your-backend-url/auth/google/callback`
-
-`ANTHROPIC_API_KEY=...`
-
-If you want the demo to stay keyless, leave the Google and Anthropic values empty and the mock path will continue to work.
-
-## Project structure
-
-`apps/api` contains the NestJS backend with Google auth, calendar sync, note persistence, and summary generation.
-
-`apps/web` contains the Next.js frontend with a presentation landing page, a demo entry point, and a dashboard that shows the note-to-summary pipeline.
-
-`packages/shared` contains shared TypeScript types.
-
-## API surface
-
-`GET /auth/google`
-
-`GET /auth/google/callback`
-
-`GET /auth/me`
-
-`GET /calendar/events`
-
-`GET /calendar/sync`
-
-`POST /notes`
-
-`GET /notes`
-
-`DELETE /notes/:noteId`
-
-`POST /summaries/generate`
-
-`GET /summaries`
-
-## Notes
-
-The repo is intentionally organized so only source, configuration, and documentation are included. Build outputs and local environment files are ignored.
+MIT
