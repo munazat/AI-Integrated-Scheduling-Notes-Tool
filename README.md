@@ -98,14 +98,8 @@ npm run dev
 
 This starts both the NestJS API and the Next.js frontend. Open `http://localhost:3000`.
 
-See [`DEPLOYMENT.md`](DEPLOYMENT.md) for a full deployment walkthrough.
-
 ## Roadmap / known limitations
 
 - No automated test suite yet — planned: unit tests around the Claude response parsing/fallback logic in `summaries.service.ts`.
 - No CI pipeline yet — planned: a GitHub Actions workflow for lint + build on PRs.
 - Redis is provisioned in `docker-compose.yml` for future caching (e.g. calendar sync results) but not yet wired into the application.
-
-## License
-
-MIT
